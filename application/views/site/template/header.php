@@ -17,9 +17,9 @@
         <link rel="stylesheet" href="<?php echo $this->assets; ?>css/style.css" type="text/css" />
     </head>
     <body>
+        <?php if($loggedin){ ?>
         <div class="topbar">
-            <?php if($loggedin){ ?>
             <a href="<?php echo base_url("login/logout"); ?>" class="btn btn-success">LogOut</a>
-            <?php } ?>
         </div>
+        <?php } ?>
         <div class="container" id="fullcontainer">

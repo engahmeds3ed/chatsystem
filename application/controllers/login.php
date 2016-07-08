@@ -8,11 +8,12 @@ class Login extends Main {
 		$postdata = $this->input->post();
         
         if(isset($postdata) && !empty($postdata)){
+            $errors = array();
             $user_username = $postdata['user_username'];
             $user_password = $this->input->post('user_password');
             
             if(empty($user_username) || empty($user_password)){
-                $this->ci_message->set('You should fill all fields.', 'login', FALSE);
+                $errors[] = "You should fill all fields.";
             }else{
                 $logindata = array(
                                 "user_username" => $user_username,
@@ -32,29 +33,17 @@ class Login extends Main {
 
                     $this->data['url'] = $returnto;
                     $this->load->view($this->foldername . '/message',$this->data);
+                    die();
                     
                 }else{
-                    $this->ci_message->set('Invalid Username OR Password!', 'login', FALSE);
+                    $errors[] = "Invalid Username OR Password!";
                 }
             }
             
-        }else{
-            
         }
-        
-        if(!$this->login_model->loggedin){
-            $client_id = $this->config_model->config->cfg_clientid;
-            $client_secret = $this->config_model->config->cfg_clientsecret;
-            
-            $this->load->library("moves");
-            $this->moves->load_construct($client_id,$client_secret,base_url("home/login_api"));
-            $this->data['request_url'] = $this->moves->requestURL();
-            
-            $this->data['title'] = "Login" . " | " . $this->config_model->config->cfg_sitename;
-            $this->load->view($this->foldername . '/login/form',$this->data);
-        }else{
-            
-        }
+        $this->data['errors'] = $errors;
+        $this->data['title'] = $this->config_model->all['sitename']." | Login";
+        $this->load->view($this->foldername .'/home-guest',$this->data);
         
 	}
     

@@ -4,7 +4,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title><?php if(!empty($title)){echo $title;}else{echo $config->cfg_sitename;} ?></title>
+        <title><?php if(!empty($title)){echo $title;}else{echo $config['sitename'];} ?></title>
         
         <!-- for IE6-8 support of HTML elements -->
         <!--[if lt IE 9]>
@@ -17,9 +17,17 @@
         <link rel="stylesheet" href="<?php echo $this->assets; ?>css/style.css" type="text/css" />
     </head>
     <body>
+        
+
         <?php if($loggedin){ ?>
-        <div class="topbar">
-            <a href="<?php echo base_url("login/logout"); ?>" class="btn btn-success">LogOut</a>
+        <div id="topbar">
+            <div class="container text-right">
+                Hi <?php echo $cur_userdata->user_fullname; ?>,
+                <a href="<?php echo base_url("chat"); ?>">Chat</a> | 
+                <a href="<?php echo base_url("login/logout"); ?>">LogOut</a>
+            </div>
         </div>
         <?php } ?>
+        
         <div class="container" id="fullcontainer">
+            <h1 class="text-center"><?php echo $config['sitename']; ?></h1>

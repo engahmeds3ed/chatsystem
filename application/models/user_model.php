@@ -103,9 +103,27 @@ class User_model extends CI_Model{
     }
 
     /**
+     * Check if user added before with fields values like email, username
+     * @param array $fields 
+     * @return boolean (TRUE: if user added before, FALSE: if user not added before)
+     */
+    function checkUserfound($fields=array()){
+        if(!empty($fields)){
+            foreach ($fields as $field_name => $field_value) {
+                if(!empty($field_value)){
+                    $this->db->or_where($field_name,$field_value);
+                }
+            }
+            return $this->db->count_all_results($this->table);
+        }else{
+            return true;
+        }
+    }
+
+    /**
      * Save user info (Insert or Update) based on user_id key
      * @param array $insertdata 
-     * @return boolean
+     * @return user id
      */
     function savedata($insertdata=array()){
         //check if tablekey exists in $insertdata array keys if it's found update else insert new row
@@ -120,8 +138,18 @@ class User_model extends CI_Model{
             $return = $id;
         }else{
             //insert
-            $this->db->insert($this->table,$insertdata);
-            $return = $this->db->insert_id();
+            //check if this user added before with the same username & email
+            $check_fields = array(
+                "user_username" => $insertdata['user_username'],
+                "user_email"    => $insertdata['user_email']
+            );
+            if( $this->checkUserfound( $check_fields ) ){
+                $return = 0;
+            }else{
+                $this->db->insert($this->table,$insertdata);
+                $return = $this->db->insert_id();
+            }
+            
         }
 
         if($this->db->affected_rows()){
@@ -162,7 +190,7 @@ class User_model extends CI_Model{
     function get_metavalue($user_id=0,$meta_key=""){
         $meta_found = $this->check_meta_found($user_id,$meta_key);
         if( $meta_found ){
-            return $this->meta->um_metavalue
+            return $this->meta->um_metavalue;
         }else{
             return "";
         }

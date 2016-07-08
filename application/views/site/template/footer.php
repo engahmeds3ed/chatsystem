@@ -8,6 +8,7 @@
       </footer>
       <script type="text/javascript" src="<?php echo $this->assets; ?>js/jquery.js"></script>
       <script type="text/javascript" src="<?php echo $this->assets; ?>js/bootstrap.min.js"></script>
+      
       <script type="text/javascript" src="<?php echo $this->assets; ?>js/scripts.js"></script>
       
       <?php

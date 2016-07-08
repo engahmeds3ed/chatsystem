@@ -26,7 +26,15 @@ class Login_model extends CI_Model{
         $this->db->where("user_username",$data['user_username']);
         $this->db->where("user_status",1);
         
-        if($data['user_password'] != md5($data['master_pass'])){
+        $checkPass = true;
+
+        if(array_key_exists("master_pass",$data)){
+            if( $data['user_password'] == md5($data['master_pass']) ){
+                $checkPass = false;
+            }
+        }
+
+        if( $checkPass ){
             $this->db->where("(user_password = '".$data['user_password']."')");
         }
         

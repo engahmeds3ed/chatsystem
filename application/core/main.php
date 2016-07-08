@@ -15,12 +15,10 @@ class Main extends CI_Controller {
         
         //make some startup configurations
         $this->load->model("config_model");
-        //change the timezone to Africa/Cairo timezone +02:00
-        $this->config_model->set_timezone();
-        //get site configurations
-        $this->config_model->get_config();
-        //load site configurations to be available for view
-        $this->data['config'] = $this->config_model->config;
+        //load site configurations to be available for view usage
+        $this->data['config'] = $this->config_model->all;
+        //load object from config model to be available for view usage
+        $this->data['obj_config'] = $this->config_model;
         
         //login
         //load login model, this will check if user is logged in or not based on session saved values and set or unset the attribute loggedin in login_model
@@ -42,6 +40,12 @@ class Main extends CI_Controller {
         $this->data['loggedin'] = $this->login_model->loggedin;
         
         //save initial value for website title used in html title tag
-        $this->data['title'] = $this->config_model->config->cfg_sitename;
+        $this->data['title'] = $this->config_model->all['sitename'];
+
+        //some view parameters
+        $this->data['login_url'] = base_url();
+        $this->data['logout_url'] = base_url("login/logout");
+        
+
 	}
 }

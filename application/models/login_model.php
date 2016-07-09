@@ -52,7 +52,8 @@ class Login_model extends CI_Model{
                                 "ses_userid"  => $userdata->user_id,
                                 "ses_timein"  => time(),
                                 "ses_timeout" => time() + ($this->loginhours*60*60),
-                                "ses_code"    => $ses_code
+                                "ses_code"    => $ses_code,
+                                "ses_lastactivity" => time() + (5*60)
                             );
              $this->db->insert('session', $sessiondata);
             
@@ -128,6 +129,45 @@ class Login_model extends CI_Model{
             
         }else{
             
+        }
+    }
+
+    /**
+     * Update last user activity with 5 minutes after now to make him online for another 5 minutes
+     * @param type $user_id 
+     * @return type
+     */
+    public function updateLastactivity($user_id){
+        if(!empty($user_id)){
+            $user_ses_code = $this->session->userdata('ses_code');
+
+            $update = array(
+                "ses_lastactivity" => time() + (5*60)
+            );
+            $this->db->where("ses_code",$user_ses_code);
+            $this->db->update("session",$update);
+        }
+    }
+
+    /**
+     * Get online status for user
+     * @param int $user_id 
+     * @return boolean
+     */
+    public function get_online_status($user_id){
+        if(!empty($user_id)){
+            $this->db->where("ses_userid", $user_id);
+            $this->db->where("ses_lastactivity >= ".time(), null, false);
+            
+            $query = $this->db->get("session");
+       
+            if($query->num_rows()){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
         }
     }
     

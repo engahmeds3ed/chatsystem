@@ -9,7 +9,9 @@ class User extends Main {
         //check if not logged in
         if(!$this->login_model->loggedin){
         	//then redirect to login controller
-            redirect(base_url("login"));
+            redirect(base_url(""));
+        }else{
+        	$this->login_model->updateLastactivity($this->cur_userdata->user_id);
         }
 
 	}

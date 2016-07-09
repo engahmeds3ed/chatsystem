@@ -45,6 +45,8 @@ class Main extends CI_Controller {
         //some view parameters
         $this->data['login_url'] = base_url();
         $this->data['logout_url'] = base_url("login/logout");
+
+        $this->data['fullwidth'] = false;
         
 
 	}

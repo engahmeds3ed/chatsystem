@@ -6,9 +6,10 @@ class Login extends Main {
 	
     public function index(){
 		$postdata = $this->input->post();
-        
+        $errors = array();
+
         if(isset($postdata) && !empty($postdata)){
-            $errors = array();
+            
             $user_username = $postdata['user_username'];
             $user_password = $this->input->post('user_password');
             
@@ -22,7 +23,6 @@ class Login extends Main {
                                 );
                 
                 $logging = $this->login_model->login($logindata);
-                
                 if($logging){
                     $this->data['msg'] = 'Logged In successfully.';
                     
@@ -33,7 +33,6 @@ class Login extends Main {
 
                     $this->data['url'] = $returnto;
                     $this->load->view($this->foldername . '/message',$this->data);
-                    die();
                     
                 }else{
                     $errors[] = "Invalid Username OR Password!";
@@ -41,9 +40,13 @@ class Login extends Main {
             }
             
         }
+
         $this->data['errors'] = $errors;
-        $this->data['title'] = $this->config_model->all['sitename']." | Login";
-        $this->load->view($this->foldername .'/home-guest',$this->data);
+        if( ( !empty($errors) && !empty($postdata) ) || empty($postdata) ){
+            $this->data['title'] = $this->config_model->all['sitename']." | Login";
+            $this->load->view($this->foldername .'/home-guest',$this->data);
+        }
+        
         
 	}
     
@@ -52,8 +55,8 @@ class Login extends Main {
         
         $this->data['msg'] = "LoggedOut Successfully.";
         $this->data['title'] = $this->data['msg'];
-        $this->data['url'] = base_url("login");
-        //$this->load->view($this->foldername . '/message',$this->data);
+        $this->data['url'] = base_url("");
+        $this->load->view($this->foldername . '/message',$this->data);
         
     }
 }

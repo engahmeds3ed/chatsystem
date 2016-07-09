@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+/*@import url(https://fonts.googleapis.com/css?family=Open+Sans);*/
 body {
     direction: ltr;
     font-family: 'Open Sans', sans-serif;
@@ -19,4 +19,87 @@ body {
 #topbar{
 	background: #efefef;
 	padding: 0.5em;
+}
+#chat-sidebar h2{
+    font-size: 15px;
+    color: #fff;
+    margin-top: 0;
+    line-height: 34px;
+    padding-left: 5px;
+    background-color: #3b5998;
+}
+#chat-sidebar-list{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+#chat-sidebar-list .sidebar-user{
+    padding: 0.5em;
+    cursor: pointer;
+}
+#chat-sidebar-list .sidebar-user:hover{
+    background-color: #fff;
+}
+#chat-sidebar-list .sidebar-user.online i{
+    color: #63ce63;
+}
+#chat-sidebar-list .sidebar-user.offline i{
+    color: #d86e6e;
+}
+
+#chat-space{
+    position: relative;
+    position: fixed;
+    bottom: 0;
+}
+.chat-item{
+    float: left;
+    margin-right: 10px;
+    overflow: hidden; 
+    width: 300px;
+    height: 300px;
+    border: 1px solid #3b5998;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.chat-item-head{
+    background-color: #3b5998;
+    color: #fff;
+    padding: 5px;
+}
+.chat-item-head a{
+    color: #fff;
+}
+.chat-item-head-icons{}
+.chat-item-body{
+    overflow-y: scroll;
+    height: 228px;
+}
+.chat-item-body-msg{
+    padding: 5px;
+    font-size: 12px;
+    border-bottom: 1px solid #efefef;
+    margin-bottom: 10px;
+}
+.chat-item-body-msg-sender,.chat-item-body-msg-time{
+    font-size: 10px;
+    font-weight: bold;
+}
+.chat-item-foot{}
+.chat-item-foot-text{
+    height: 40px !important;
+    padding: 0 0 0 40px;
+    border-radius: 0;
+    line-height: 10px;
+    font-size: 10px;
+}
+.chat-item-foot-sendmsg{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 40px;
+    width: 40px;
+    border: 0;
+    background: transparent;
+    border-right: 2px solid #efefef;
 }

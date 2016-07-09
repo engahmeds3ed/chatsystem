@@ -14,6 +14,9 @@
         <link href="<?php echo $this->assets; ?>css/font-awesome.css" rel="stylesheet" />
         <link href="<?php echo $this->assets; ?>css/bootstrap.min.css" rel="stylesheet" />
         <link href="<?php echo $this->assets; ?>css/bootstrap-theme.min.css" rel="stylesheet" />
+        <?php if($loggedin){ ?>
+            <link href="<?php echo $this->assets; ?>css/simple-sidebar.css" rel="stylesheet" />
+        <?php } ?>
         <link rel="stylesheet" href="<?php echo $this->assets; ?>css/style.css" type="text/css" />
     </head>
     <body>
@@ -29,5 +32,5 @@
         </div>
         <?php } ?>
         
-        <div class="container" id="fullcontainer">
+        <div class="container<?php if($fullwidth){ ?>-fluid<?php } ?>" id="fullcontainer">
             <h1 class="text-center"><?php echo $config['sitename']; ?></h1>

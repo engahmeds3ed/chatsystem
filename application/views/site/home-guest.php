@@ -34,7 +34,7 @@
 				Login Now
 			</div>
 			<div class="panel-body">
-				<?php if(!empty($errors)){ ?>
+				<?php if( isset($errors) && !empty($errors)){ ?>
 					<div class="alert alert-danger">
 					<ul>
 					<?php foreach ($errors as $error) {
@@ -43,6 +43,7 @@
 					</ul>
 					</div>
 				<?php } ?>
+				
 				<?php echo form_open( base_url("login") ); ?>
 				<div class="form-group">
 					<?php echo form_input("user_username","","placeholder='Username' class='form-control'"); ?>

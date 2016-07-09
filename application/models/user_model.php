@@ -36,7 +36,11 @@ class User_model extends CI_Model{
         
         if(!empty($wheredata)){
             foreach($wheredata as $field=>$value){
-                $this->db->where($field,$value);
+                if($field === "FREE"){
+                    $this->db->where($value,null,false);
+                }else{
+                    $this->db->where($field,$value);
+                }
             }
         }
         

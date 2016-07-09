@@ -6,6 +6,9 @@
         </div>
         
       </footer>
+      <script src="<?php echo $this->assets; ?>js/angular.min.js"></script>
+      <script src="<?php echo $this->assets; ?>js/angular-sanitize.min.js"></script>
+
       <script type="text/javascript" src="<?php echo $this->assets; ?>js/jquery.js"></script>
       <script type="text/javascript" src="<?php echo $this->assets; ?>js/bootstrap.min.js"></script>
       

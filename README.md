@@ -1,5 +1,3 @@
-<snippet>
-  <content>
 ##Chat System
 
 
@@ -10,36 +8,38 @@ You can send the message by clicking on ENTER button and you can use SHIFT+ENTER
 
 ## Technical Choices
 I used the following technologies to get this system online:-
-1. Twitter Bootstrap: to make a responsive design that can be best viewed in all screen sizes.
-2. Angular JS: to make frontend with easy and moduled structure.
-3. AJAX: to make requests getting online users and chat messages.
-4. PHP: for backend using Codeigniter framework.
-5. MySQL: database engine.
+<ol>
+<li>Twitter Bootstrap: to make a responsive design that can be best viewed in all screen sizes.</li>
+<li>Angular JS: to make frontend with easy and moduled structure.</li>
+<li>AJAX: to make requests getting online users and chat messages.</li>
+<li>PHP: for backend using Codeigniter framework.</li>
+<li>MySQL: database engine.</li>
+</ol>
 
 ## Design
 Using Bootstrap I make a very simple design for two main pages (Home page - chat page)
 
 ## Demo
-You can view a demo for this simple system with the following details:-
+You can view a demo for this simple system with the following details:-<br>
 
-http://lowpricehost.info/testbed/chatsystem/
-First User:
-Username: user
-Password: user8766
-
-Second User:
-Username: user2
-Password: user8766
+http://lowpricehost.info/testbed/chatsystem/ <br>
+First User:<br>
+Username: user<br>
+Password: user8766<br>
+<br><br>
+Second User:<br>
+Username: user2<br>
+Password: user8766<br>
 
 ## History
 V1.0: simple register/login with simple chat page like facebook
 
 ## Future to do
-1. login via facebook, twitter, Google, ....etc.
-2. Add sounds with new messages and user changed status
-3. user can change his online status
+<ol>
+<li>login via facebook, twitter, Google, ....etc.</li>
+<li>Add sounds with new messages and user changed status</li>
+<li>user can change his online status</li>
+</ol>
 
 ## Credits
 Eng. Ahmed S3ed - eng.ahmeds3ed@gmail.com
-</content>
-</snippet>

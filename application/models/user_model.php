@@ -118,7 +118,12 @@ class User_model extends CI_Model{
                     $this->db->or_where($field_name,$field_value);
                 }
             }
-            return $this->db->count_all_results($this->table);
+            $query = $this->db->get($this->table);
+            $count = $query->num_rows();
+            if($count > 0){
+                $this->one = $query->row();
+            }
+            return $count;
         }else{
             return true;
         }

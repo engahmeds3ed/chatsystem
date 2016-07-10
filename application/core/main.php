@@ -48,6 +48,12 @@ class Main extends CI_Controller {
 
         $this->data['fullwidth'] = false;
         
+        //fb third party
+        $fb_config = array(
+            "appId"  => $this->config_model->all['fb_appid'],
+            "secret" => $this->config_model->all['fb_secret']
+        );
+        $this->load->library('facebook', $fb_config);
 
 	}
 }

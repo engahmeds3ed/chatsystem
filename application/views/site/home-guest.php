@@ -54,6 +54,12 @@
 				<hr>
 				<?php echo form_submit("login_submit","Login Now","class='btn btn-success pull-right'"); ?>
 				<div class="clearfix"></div>
+				<a href="<?php echo $fb_login; ?>" class="btn btn-info">
+					<i class="fa fa-facebook"></i>
+					Login with facebook
+				</a>
+
+				<div class="clearfix"></div>
 				<?php echo form_close(); ?>
 			</div>
 		</div>

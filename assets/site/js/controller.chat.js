@@ -10,6 +10,11 @@ chatApp.controller('chatCtrl', function($scope,$interval,$http,$timeout) {
 			url : $scope.ajaxurl + "/getUsers"
 		}).then(function mySucces(response) {
 			$scope.allusers = response.data;
+			$scope.allusers.forEach(function(user) {
+			    if(user.newMsgCount > 0){
+			    	$scope.startChat(user);
+			    }
+			});
 		}, function myError(response) {
 			console.log(response.statusText);
 		});

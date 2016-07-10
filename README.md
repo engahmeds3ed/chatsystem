@@ -42,5 +42,4 @@ V1.0: simple register/login with simple chat page like facebook
 ## Credits
 Eng. Ahmed S3ed - eng.ahmeds3ed@gmail.com
 </content>
-  <tabTrigger>readme</tabTrigger>
 </snippet>

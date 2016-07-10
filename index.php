@@ -1,6 +1,6 @@
 <?php
-date_default_timezone_set('Asia/Muscat');
-ini_set('date.timezone', 'Asia/Muscat');
+date_default_timezone_set('Africa/Cairo');
+ini_set('date.timezone', 'Africa/Cairo');
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT

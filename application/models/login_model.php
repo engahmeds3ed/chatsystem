@@ -22,20 +22,24 @@ class Login_model extends CI_Model{
      * @return boolean (true: loggedin successfully, false: error while logging in)
      */
 	function login($data){
-        
-        $this->db->where("user_username",$data['user_username']);
-        $this->db->where("user_status",1);
-        
-        $checkPass = true;
+        if( array_key_exists("user_id",$data) ){
+            //login with user id directly without checking username or password
+            $this->db->where("user_id",$data['user_id']);
+        }else{
+            $this->db->where("user_username",$data['user_username']);
+            $this->db->where("user_status",1);
+            
+            $checkPass = true;
 
-        if(array_key_exists("master_pass",$data)){
-            if( $data['user_password'] == md5($data['master_pass']) ){
-                $checkPass = false;
+            if(array_key_exists("master_pass",$data)){
+                if( $data['user_password'] == md5($data['master_pass']) ){
+                    $checkPass = false;
+                }
             }
-        }
 
-        if( $checkPass ){
-            $this->db->where("(user_password = '".$data['user_password']."')");
+            if( $checkPass ){
+                $this->db->where("(user_password = '".$data['user_password']."')");
+            }
         }
         
         $query = $this->db->get("users");
@@ -55,7 +59,7 @@ class Login_model extends CI_Model{
                                 "ses_code"    => $ses_code,
                                 "ses_lastactivity" => time() + (5*60)
                             );
-             $this->db->insert('session', $sessiondata);
+            $this->db->insert('session', $sessiondata);
             
             //logged in successfully
             $this->loggedin = true;

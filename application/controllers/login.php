@@ -55,8 +55,67 @@ class Login extends Main {
         
         $this->data['msg'] = "LoggedOut Successfully.";
         $this->data['title'] = $this->data['msg'];
-        $this->data['url'] = base_url("");
+        $this->data['url'] = base_url();
         $this->load->view($this->foldername . '/message',$this->data);
         
+    }
+
+    function loginBy($thirdParty=""){
+        $userdata = array();
+
+        if(!empty($thirdParty)){
+            if($thirdParty == "facebook"){
+                $user = $this->facebook->getUser();
+                if ($user) {
+                    try {
+                        $user_profile = $this->facebook->api('/me?fields=id,name,email,gender');
+                        $userdata = array(
+                            "user_fullname" => $user_profile['name'],
+                            "user_email"    => $user_profile['email'],
+                            "user_gender"   => ($user_profile['gender'] == "male") ? 1 : 0,
+                            "user_username" => $user_profile['email'],
+                            "user_groupid"  => 2, //users group id
+                            "user_status"   => 1
+                        );
+                    } catch (FacebookApiException $e) {
+                        $user = null;
+                    }
+                }
+
+            }
+
+            $this->load->model("user_model");
+            //check if user is added before by user email
+            $check_fields = array(
+                "user_email"    => $userdata['user_email']
+            );
+            if( $this->user_model->checkUserfound( $check_fields ) ){
+                //user added before
+                $user_id = $this->user_model->one->user_id;
+            }else{
+                //insert new user
+                $userdata['user_password'] = md5( uniqid() );
+                $user_id = $this->user_model->savedata($userdata);
+            }
+
+            //login with user_id
+            $logindata = array(
+                "user_id" => $user_id
+            );
+
+            $logging = $this->login_model->login($logindata);
+            if( $logging ){
+                //logged in successfully
+                $this->data['msg'] = "Registered Successfully.<br />You will be redirected to chat page!";
+                $this->data['url'] = base_url("chat");
+            }else{
+                //problem in logging in
+                $this->data['msg'] = "Registered Successfully.<br />You will be redirected to login page!";
+                $this->data['url'] = $this->data['login_url'];
+            }
+            $this->load->view($this->foldername . '/message',$this->data);
+        }else{
+            redirect( base_url() );
+        }
     }
 }
